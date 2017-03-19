@@ -9,7 +9,8 @@
   (fn [{fll :pid} event trigger]
     (go
       (match [event]
-        [[fll :send p m]] (>! trigger [fll :deliver p m])
+        [[fll :send p m]] (when (= 1 (rand-int 2))
+                            (>! trigger [fll :deliver p m]))
         :else nil))))
 
 (defn new-fair-loss-link [events trigger]
