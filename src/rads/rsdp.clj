@@ -60,3 +60,14 @@
         :sl (new-stubborn-link sl-events trigger-chan))
       (component/system-using
         {:sl [:fll]})))
+
+(comment
+  (require '[rads.rsdp.util :as util] :reload)
+  (require '[rads.rsdp :as rsdp] :reload)
+  (require '[clojure.core.async :as async])
+  (require '[com.stuartsierra.component :as component])
+  (def channels (rsdp/new-channels))
+  (def s (async/chan (async/dropping-buffer 100)))
+  (async/tap (:events-mult channels) s)
+  (async/go-loop [] (when-let [m (async/<! s)] (println m) (recur)))
+  (def sys (component/start (rsdp/new-system channels))))
