@@ -1,17 +1,16 @@
 (ns rads.rsdp
   (:require
-    [clojure.core.async :as async :refer [go >!]]
+    [clojure.core.async :as async]
     [clojure.core.match :refer [match]]
     [rads.rsdp.util :as util]
     [com.stuartsierra.component :as component]))
 
 (defn- fair-loss-link-handler []
   (fn [{fll :pid} event trigger]
-    (go
-      (match [event]
-        [[fll :send p m]] (when (= 1 (rand-int 2))
-                            (>! trigger [fll :deliver p m]))
-        :else nil))))
+    (match [event]
+      [[fll :send p m]] (when (= 1 (rand-int 2))
+                          (async/put! trigger [fll :deliver p m]))
+      :else nil)))
 
 (defn new-fair-loss-link [opts]
   (util/new-async-process
@@ -19,20 +18,19 @@
 
 (defn- stubborn-link-handler [sent delta]
   (fn [{sl :pid {fll :pid} :fll} event trigger]
-    (go
-      (match [event]
-        [[sl :init]] (do
-                       (reset! sent #{})
-                       (util/start-timer delta))
-        [[:timeout]] (do
-                       (doseq [[q m] @sent]
-                         (>! trigger [fll :send q m]))
-                       (util/start-timer delta))
-        [[sl :send q m]] (do
-                           (>! trigger [fll :send q m])
-                           (swap! sent conj [q m]))
-        [[fll :deliver p m]] (>! trigger [sl :deliver p m])
-        :else nil))))
+    (match [event]
+      [[sl :init]] (do
+                     (reset! sent #{})
+                     (util/start-timer delta))
+      [[:timeout]] (do
+                     (doseq [[q m] @sent]
+                       (async/put! trigger [fll :send q m]))
+                     (util/start-timer delta))
+      [[sl :send q m]] (do
+                         (async/put! trigger [fll :send q m])
+                         (swap! sent conj [q m]))
+      [[fll :deliver p m]] (async/put! trigger [sl :deliver p m])
+      :else nil)))
 
 (defn new-stubborn-link [opts]
   (util/new-async-process

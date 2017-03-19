@@ -18,7 +18,7 @@
     (go-loop []
       (let [[event ch] (async/alts! [stop events] :priority true)]
         (when-not (= ch stop)
-          (<! (handler pid event trigger))
+          (handler pid event trigger)
           (recur))))
     stop))
 
