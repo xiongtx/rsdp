@@ -25,8 +25,7 @@
 (defrecord AsyncProcess [pid handle events trigger stop]
   component/Lifecycle
   (start [p]
-    (let [started (assoc p :pid pid)
-          stop (consume-events started handle events trigger)]
+    (let [stop (consume-events p handle events trigger)]
       (async/put! trigger [pid :init])
       (assoc started :stop stop)))
   (stop [p]
