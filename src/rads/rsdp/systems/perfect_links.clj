@@ -1,56 +1,11 @@
-(ns rads.rsdp
+(ns rads.rsdp.systems.perfect-links
   (:require
     [clojure.core.async :as async]
-    [clojure.core.match :refer [match]]
     [rads.rsdp.util :as util]
-    [com.stuartsierra.component :as component]))
-
-(defn- fair-loss-link-handler []
-  (fn [{fll :pid} event trigger]
-    (match [event]
-      [[fll :send p m]] (when (= 1 (rand-int 2))
-                          (trigger [fll :deliver p m]))
-      :else nil)))
-
-(defn new-fair-loss-link [opts]
-  (util/new-async-process
-    (assoc opts :handler (fair-loss-link-handler))))
-
-(def delta 3000)
-
-(defn- stubborn-link-handler [sent]
-  (fn [{sl :pid {fll :pid} :fll} event trigger]
-    (match [event]
-      [[sl :init]] (do
-                     (reset! sent #{})
-                     (util/start-timer delta))
-      [[:timeout]] (do
-                     (doseq [[q m] @sent]
-                       (trigger [fll :send q m]))
-                     (util/start-timer delta))
-      [[sl :send q m]] (do
-                         (trigger [fll :send q m])
-                         (swap! sent conj [q m]))
-      [[fll :deliver p m]] (trigger [sl :deliver p m])
-      :else nil)))
-
-(defn new-stubborn-link [opts]
-  (util/new-async-process
-    (assoc opts :handler (stubborn-link-handler (atom nil)))))
-
-(defn- perfect-link-handler [delivered]
-  (fn [{pl :pid {sl :pid} :sl} event trigger]
-    (match [event]
-      [[pl :init]] (reset! delivered #{})
-      [[pl :send q m]] (trigger [sl :send q m])
-      [[sl :deliver p m]] (when-not (@delivered m)
-                            (swap! delivered conj m)
-                            (trigger [pl :deliver p m]))
-      :else nil)))
-
-(defn new-perfect-link [opts]
-  (util/new-async-process
-    (assoc opts :handler (perfect-link-handler (atom nil)))))
+    [com.stuartsierra.component :as component]
+    [rads.rsdp.fair-loss-links :refer [new-fair-loss-link]]
+    [rads.rsdp.stubborn-links :refer [new-stubborn-link]]
+    [rads.rsdp.perfect-links :refer [new-perfect-link]]))
 
 (defn new-channels []
   (let [trigger-chan (async/chan 100)
@@ -92,7 +47,7 @@
 
 (comment
   (require '[rads.rsdp.util :as util] :reload)
-  (require '[rads.rsdp :as rsdp] :reload)
+  (require '[rads.rsdp.systems.perfect-links :as rsdp] :reload)
   (require '[clojure.core.async :as async])
   (require '[com.stuartsierra.component :as component])
   (def channels (rsdp/new-channels))
