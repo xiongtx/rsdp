@@ -13,24 +13,25 @@
     (<! (async/timeout delta))
     (>! timeouts-chan [:timeout])))
 
-(defn- consume-events [pid handler events trigger]
-  (let [stop (async/chan)]
+(defn- consume-events [{:keys [handler events-chan trigger-chan] :as p}]
+  (let [stop-chan (async/chan)]
     (go-loop []
-      (let [[event ch] (async/alts! [stop events] :priority true)]
-        (when-not (= ch stop)
-          (handler pid event trigger)
+      (let [[event ch] (async/alts! [stop-chan events-chan] :priority true)]
+        (when-not (= ch stop-chan)
+          (handler p event #(async/put! trigger-chan %))
           (recur))))
-    stop))
+    stop-chan))
 
-(defrecord AsyncProcess [pid handler events trigger stop]
+(defrecord AsyncProcess [pid handler events-chan trigger-chan stop-chan]
   component/Lifecycle
   (start [p]
-    (let [stop (consume-events p handler events trigger)]
-      (async/put! trigger [pid :init])
-      (assoc p :stop stop)))
+    (let [stop-chan (consume-events p)]
+      (async/put! trigger-chan [pid :init])
+      (assoc p :stop-chan stop-chan)))
   (stop [p]
-    (async/close! (:stop p))
-    (assoc p :stop nil)))
+    (async/close! (:stop-chan p))
+    (assoc p :stop-chan nil)))
 
 (defn new-async-process [opts]
-  (map->AsyncProcess (select-keys opts [:handler :events :trigger :pid])))
+  (let [keys [:pid :handler :events-chan :trigger-chan]]
+    (map->AsyncProcess (select-keys opts keys))))

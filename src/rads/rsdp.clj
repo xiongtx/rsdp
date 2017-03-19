@@ -9,7 +9,7 @@
   (fn [{fll :pid} event trigger]
     (match [event]
       [[fll :send p m]] (when (= 1 (rand-int 2))
-                          (async/put! trigger [fll :deliver p m]))
+                          (trigger [fll :deliver p m]))
       :else nil)))
 
 (defn new-fair-loss-link [opts]
@@ -24,12 +24,12 @@
                      (util/start-timer delta))
       [[:timeout]] (do
                      (doseq [[q m] @sent]
-                       (async/put! trigger [fll :send q m]))
+                       (trigger [fll :send q m]))
                      (util/start-timer delta))
       [[sl :send q m]] (do
-                         (async/put! trigger [fll :send q m])
+                         (trigger [fll :send q m])
                          (swap! sent conj [q m]))
-      [[fll :deliver p m]] (async/put! trigger [sl :deliver p m])
+      [[fll :deliver p m]] (trigger [sl :deliver p m])
       :else nil)))
 
 (defn new-stubborn-link [opts]
@@ -56,12 +56,12 @@
   (-> (component/system-map
         :fll (new-fair-loss-link
                {:pid "fll"
-                :events fll-events
-                :trigger trigger-chan})
+                :events-chan fll-events
+                :trigger-chan trigger-chan})
         :sl (new-stubborn-link
               {:pid "sl"
-               :events sl-events
-               :trigger trigger-chan}))
+               :events-chan sl-events
+               :trigger-chan trigger-chan}))
       (component/system-using
         {:sl [:fll]})))
 
