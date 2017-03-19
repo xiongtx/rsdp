@@ -27,14 +27,10 @@
   (start [p]
     (let [stop (consume-events p handle events trigger)]
       (async/put! trigger [pid :init])
-      (assoc started :stop stop)))
+      (assoc p :stop stop)))
   (stop [p]
     (async/close! (:stop p))
     (assoc p :stop nil)))
 
-(defn new-async-process [handle events trigger]
-  (map->AsyncProcess
-    {:handle handle
-     :events events
-     :trigger trigger
-     :pid (UUID/randomUUID)}))
+(defn new-async-process [opts]
+  (map->AsyncProcess (select-keys opts [:handle :events :trigger :pid])))

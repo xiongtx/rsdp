@@ -13,7 +13,7 @@
                             (>! trigger [fll :deliver p m]))
         :else nil))))
 
-(defn new-fair-loss-link [events trigger]
+(defn new-fair-loss-link [pid events trigger]
   (let [handle (fair-loss-link-handler)]
     (util/new-async-process handle events trigger)))
 
@@ -34,7 +34,7 @@
         [[fll :deliver p m]] (>! trigger [sl :deliver p m])
         :else nil))))
 
-(defn new-stubborn-link [events trigger]
+(defn new-stubborn-link [pid events trigger]
   (let [handle (stubborn-link-handler (atom nil) 1000)]
     (util/new-async-process handle events trigger)))
 
@@ -56,8 +56,8 @@
 
 (defn new-system [{:keys [trigger-chan fll-events sl-events] :as channels}]
   (-> (component/system-map
-        :fll (new-fair-loss-link fll-events trigger-chan)
-        :sl (new-stubborn-link sl-events trigger-chan))
+        :fll (new-fair-loss-link "fll" fll-events trigger-chan)
+        :sl (new-stubborn-link "sl" sl-events trigger-chan))
       (component/system-using
         {:sl [:fll]})))
 
