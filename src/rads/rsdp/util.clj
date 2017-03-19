@@ -22,17 +22,20 @@
           (recur))))
     stop))
 
-(defrecord AsyncProcess [handle events trigger stop pid]
+(defrecord AsyncProcess [pid handle events trigger stop]
   component/Lifecycle
   (start [p]
-    (let [pid (UUID/randomUUID)
-          started (assoc p :pid pid)
+    (let [started (assoc p :pid pid)
           stop (consume-events started handle events trigger)]
       (async/put! trigger [pid :init])
       (assoc started :stop stop)))
   (stop [p]
     (async/close! (:stop p))
-    (assoc p :pid nil :stop nil)))
+    (assoc p :stop nil)))
 
 (defn new-async-process [handle events trigger]
-  (->AsyncProcess handle events trigger nil nil))
+  (map->AsyncProcess
+    {:handle handle
+     :events events
+     :trigger trigger
+     :pid (UUID/randomUUID)}))
