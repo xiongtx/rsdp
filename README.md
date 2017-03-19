@@ -6,9 +6,14 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 
 ## List of Algorithms
 
+### Chapter 1
+
 - 1.1 Synchronous Job Handler
 - 1.2 Asynchronous Job Handler
 - 1.3 Job-Transformation by Buffering
+
+### Chapter 2
+
 - 2.1 Retransmit Forever
 - 2.2 Eliminate Duplicates
 - 2.3 Log Delivered
