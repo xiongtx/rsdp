@@ -12,4 +12,17 @@
 
   Properties:
     - JH1: Guaranteed response
-      - Every submitted job is eventually confirmed.")
+      - Every submitted job is eventually confirmed."
+  (:require [clojure.core.match :refer [match]]))
+
+(defn advance [state event {:keys [jh process select-job] :as config}]
+  (match [event]
+    [[jh :init]] (assoc state ::buffer #{})
+    [[jh :submit job]] (-> state
+                           (update ::buffer conj job)
+                           (assoc :trigger [[jh :confirm job]]))
+    [:upon] (when (seq (::buffer state))
+              (let [job (select-job (::buffer state))]
+                (process job)
+                (update state ::buffer disj job)))
+    :else nil))
