@@ -10,8 +10,8 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 
 ### Chapter 1
 
-- [1.1 Synchronous Job Handler](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/synchronous-job-handler.clj)
-- [1.2 Asynchronous Job Handler](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/asynchronous-job-handler.clj)
+- [1.1 Synchronous Job Handler](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/synchronous_job_handler.clj)
+- [1.2 Asynchronous Job Handler](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/asynchronous_job_handler.clj)
 - 1.3 Job-Transformation by Buffering
 
 ### Chapter 2
