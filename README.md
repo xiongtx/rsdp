@@ -1,6 +1,6 @@
 # rsdp
 
-<img src="docs/book.jpg" align="right">
+<img width="165" src="docs/book.jpg" align="right">
 
 **This code is alpha status. The current implementations are not necessarily functional or correct.**
 
