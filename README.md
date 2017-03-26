@@ -23,7 +23,7 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 - [2.5 Exclude on Timeout](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/exclude_on_timeout.clj)
 - [2.6 Monarchical Leader Election](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/monarchical_leader_election.clj)
 - [2.7 Increasing Timeout](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/increasing_timeout.clj)
-- 2.8 Monarchical Eventual Leader Detection
+- [2.8 Monarchical Eventual Leader Detection](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/monarchical_eventual_leader_detection.clj)
 - 2.9 Elect Lower Epoch
 - 2.10 Rotating Byzantine Leader Detection
 - 2.11 Sequence Number
