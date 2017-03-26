@@ -16,8 +16,8 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 
 ### Chapter 2
 
-- 2.1 Retransmit Forever
-- 2.2 Eliminate Duplicates
+- [2.1 Retransmit Forever](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/retransmit_forever.clj)
+- [2.2 Eliminate Duplicates](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/eliminate_duplicates.clj)
 - 2.3 Log Delivered
 - 2.4 Authenticate and Filter
 - 2.5 Exclude on Timeout
