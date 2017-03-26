@@ -4,8 +4,8 @@
     [rads.rsdp.util :as util]
     [com.stuartsierra.component :as component]
     [rads.rsdp.fair-loss-links :refer [new-fair-loss-link]]
-    [rads.rsdp.stubborn-links :refer [new-stubborn-link]]
-    [rads.rsdp.perfect-links :refer [new-perfect-link]]))
+    [rads.rsdp.retransmit-forever :refer [new-stubborn-link]]
+    [rads.rsdp.eliminate-duplicates :refer [new-perfect-link]]))
 
 (defn new-channels []
   (let [trigger-chan (async/chan 100)

@@ -1,4 +1,4 @@
-(ns rads.rsdp.stubborn-links
+(ns rads.rsdp.retransmit-forever
   (:require
     [clojure.core.match :refer [match]]
     [rads.rsdp.util :as util]))

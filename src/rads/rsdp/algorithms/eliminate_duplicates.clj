@@ -1,4 +1,4 @@
-(ns rads.rsdp.perfect-links
+(ns rads.rsdp.eliminate-duplicates
   (:require
     [clojure.core.match :refer [match]]
     [rads.rsdp.util :as util]))
