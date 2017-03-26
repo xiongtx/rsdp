@@ -26,4 +26,4 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 - [2.8 Monarchical Eventual Leader Detection](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/monarchical_eventual_leader_detection.clj)
 - [2.9 Elect Lower Epoch](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/elect_lower_epoch.clj)
 - [2.10 Rotating Byzantine Leader Detection](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/rotating_byzantine_leader_detection.clj)
-- 2.11 Sequence Number
+- [2.11 Sequence Number](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/sequence_number.clj)
