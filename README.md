@@ -51,3 +51,6 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 - 3.19 Byzantine Consistent Channel
 - 3.20 Byzantine Reliable Channel
 - 3.21 Simple Optimization of Lazy Reliable Broadcast
+- 3.22 Ideal Uniform Reliable Broadcast
+- 3.23 Logged Eager Reliable Broadcast
+- 3.24 No-Waiting Causal Broadcast using FIFO Broadcast
