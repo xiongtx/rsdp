@@ -16,9 +16,9 @@
   (:require [clojure.core.match :refer [match]]
             [rads.rsdp.util :as util]))
 
-(defn advance [_ event {:keys [jh process trigger] :as config}]
+(defn advance [state event {:keys [jh process] :as config}]
   (match [event]
     [[jh :submit job]] (do
                          (process job)
-                         (trigger [jh :confirm job]))
+                         (assoc state :trigger [[jh :confirm job]]))
     :else nil))

@@ -10,17 +10,14 @@
           event [::jh :submit job]
           processed (atom [])
           config {:jh ::jh
-                  :process #(swap! processed conj %)
-                  :trigger (fn [_])}]
+                  :process #(swap! processed conj %)}]
       (job-handler/advance state event config)
       (is (= [::test-job] @processed))))
   (testing "triggers confirm events"
     (let [state nil
           job ::test-job
           event [::jh :submit job]
-          triggered (atom [])
           config {:jh ::jh
-                  :process (fn [_])
-                  :trigger #(swap! triggered conj %)}]
-      (job-handler/advance state event config)
-      (is (= [[::jh :confirm job]] @triggered)))))
+                  :process (fn [_])}
+          {:keys [trigger]} (job-handler/advance state event config)]
+      (is (= [[::jh :confirm job]] trigger)))))
