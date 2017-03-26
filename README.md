@@ -4,6 +4,8 @@
 
 Implementations of algorithms from [*Introduction to Reliable and Secure Distributed Programming*][rsdp].
 
+<img src="docs/book.jpg" align="right">
+
 [rsdp]: http://distributedprogramming.net
 
 ## List of Algorithms
