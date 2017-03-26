@@ -35,6 +35,6 @@
                   (-> state
                       (update ::bottom inc)
                       (assoc ::handling true)
-                      (assoc ::trigger [[jh :submit job]]))))
+                      (assoc :trigger [[jh :submit job]]))))
       [[jh :confirm job]] (assoc state ::handling false)
       :else nil)))
