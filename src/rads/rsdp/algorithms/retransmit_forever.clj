@@ -1,4 +1,4 @@
-(ns rads.rsdp.retransmit-forever
+(ns rads.rsdp.algorithms.retransmit-forever
   "Algorithm 2.1: Retransmit Forever
 
   Module:

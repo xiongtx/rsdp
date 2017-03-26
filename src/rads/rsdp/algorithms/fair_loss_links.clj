@@ -1,4 +1,4 @@
-(ns rads.rsdp.fair-loss-links
+(ns rads.rsdp.algorithms.fair-loss-links
   "Module:
     Name: FairLossPointToPointLinks, instance fll.
 

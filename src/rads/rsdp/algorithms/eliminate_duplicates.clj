@@ -1,4 +1,4 @@
-(ns rads.rsdp.eliminate-duplicates
+(ns rads.rsdp.algorithms.eliminate-duplicates
   "Algorithm 2.2: Eliminate Duplicates
 
   Module:

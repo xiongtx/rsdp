@@ -1,4 +1,4 @@
-(ns rads.rsdp.job-transformation-by-buffering
+(ns rads.rsdp.algorithms.job-transformation-by-buffering
   "Algorithm 1.3: Job-Transformation by Buffering
   
   Module:
