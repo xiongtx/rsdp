@@ -1,5 +1,7 @@
 # rsdp
 
+**This code is alpha status. The current implementations are not necessarily functional or correct.**
+
 Implementations of algorithms from [*Introduction to Reliable and Secure Distributed Programming*][rsdp].
 
 [rsdp]: http://distributedprogramming.net
