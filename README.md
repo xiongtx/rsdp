@@ -21,7 +21,7 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 - [2.3 Log Delivered](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/log_delivered.clj)
 - [2.4 Authenticate and Filter](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/authenticate_and_filter.clj)
 - [2.5 Exclude on Timeout](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/exclude_on_timeout.clj)
-- 2.6 Monarchical Leader Election
+[- 2.6 Monarchical Leader Election](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/monarchical_leader_election.clj)
 - 2.7 Increasing Timeout
 - 2.8 Monarchical Eventual Leader Detection
 - 2.9 Elect Lower Epoch
