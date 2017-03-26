@@ -8,13 +8,13 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 
 ## List of Algorithms
 
-### Chapter 1
+### Chapter 1: Introduction
 
 - [1.1 Synchronous Job Handler](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/synchronous_job_handler.clj)
 - [1.2 Asynchronous Job Handler](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/asynchronous_job_handler.clj)
 - [1.3 Job-Transformation by Buffering](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/job_transformation_by_buffering.clj)
 
-### Chapter 2
+### Chapter 2: Basic Abstractions
 
 - [2.1 Retransmit Forever](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/retransmit_forever.clj)
 - [2.2 Eliminate Duplicates](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/eliminate_duplicates.clj)
@@ -28,7 +28,7 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 - [2.10 Rotating Byzantine Leader Detection](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/rotating_byzantine_leader_detection.clj)
 - [2.11 Sequence Number](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/sequence_number.clj)
 
-### Chapter 3
+### Chapter 3: Reliable Broadcast
 
 - 3.1 Basic Broadcast
 - 3.2 Lazy Reliable Broadcast
