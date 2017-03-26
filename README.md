@@ -19,7 +19,7 @@ Implementations of algorithms from [*Introduction to Reliable and Secure Distrib
 - [2.1 Retransmit Forever](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/retransmit_forever.clj)
 - [2.2 Eliminate Duplicates](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/eliminate_duplicates.clj)
 - [2.3 Log Delivered](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/log_delivered.clj)
-- 2.4 Authenticate and Filter
+- [2.4 Authenticate and Filter](https://github.com/rads/rsdp/blob/master/src/rads/rsdp/algorithms/authenticate_and_filter.clj)
 - 2.5 Exclude on Timeout
 - 2.6 Monarchical Leader Election
 - 2.7 Increasing Timeout
