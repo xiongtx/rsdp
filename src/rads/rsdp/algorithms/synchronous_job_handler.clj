@@ -12,4 +12,13 @@
 
   Properties:
     - JH1: Guaranteed response
-      - Every submitted job is eventually confirmed.")
+      - Every submitted job is eventually confirmed."
+  (:require [clojure.core.match :refer [match]]
+            [rads.rsdp.util :as util]))
+
+(defn advance [_ event {:keys [jh process trigger] :as config}]
+  (match [event]
+    [[jh :submit job]] (do
+                         (process job)
+                         (trigger [jh :confirm job]))
+    :else nil))
