@@ -1,4 +1,22 @@
 (ns rads.rsdp.retransmit-forever
+  "Algorithm 2.1: Retransmit Forever
+
+  Module:
+    - Name: StubbornPointToPointLinks, instance sl.
+
+  Events:
+    - Request: ⟨ sl, Send | q, m ⟩
+      - Requests to send message m to process q.
+    - Indication: ⟨ sl, Deliver | p, m ⟩
+      - Delivers message m sent by process p.
+
+  Properties:
+    - SL1: Stubborn delivery
+      - If a correct process p sends a message m once to a correct process q,
+        then q delivers m an infinite number of times.
+    - SL2: No creation
+      - If some process q delivers a message m with sender p, then m was
+        previously sent to q by process p."
   (:require
     [clojure.core.match :refer [match]]
     [rads.rsdp.util :as util]))

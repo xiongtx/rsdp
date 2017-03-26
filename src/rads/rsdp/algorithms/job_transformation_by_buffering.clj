@@ -2,14 +2,14 @@
   "Algorithm 1.3: Job-Transformation by Buffering
   
   Module:
-    Name: TransformationHandler, instance th.
+    - Name: TransformationHandler, instance th.
 
   Events:
-    Request: ⟨ th, Submit | job ⟩
+    - Request: ⟨ th, Submit | job ⟩
       - Submits a job for transformation and for processing.
-    Indication: ⟨ th, Confirm | job ⟩
+    - Indication: ⟨ th, Confirm | job ⟩
       - Confirms that the given job has been (or will be) transformed and processed.
-    Indication: ⟨ th, Error | job ⟩
+    - Indication: ⟨ th, Error | job ⟩
       - Indicates that the transformation of the given job failed.
 
   Properties:

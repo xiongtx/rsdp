@@ -11,4 +11,5 @@
       - Confirms that the given job has been (or will be) processed.
 
   Properties:
-    - JH1: Guaranteed response: Every submitted job is eventually confirmed.")
+    - JH1: Guaranteed response
+      - Every submitted job is eventually confirmed.")
